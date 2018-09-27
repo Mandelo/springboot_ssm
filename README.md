@@ -1,2 +1,2 @@
 # springboot_ssm
-springboot整合ssm
+springboot ssm mybatisPlus beetl
