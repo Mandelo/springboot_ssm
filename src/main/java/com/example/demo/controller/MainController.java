@@ -1,26 +1,34 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.Goods;
-import com.example.demo.service.GoodsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created by losho on 2018-09-15.
  */
-@RestController
+@Controller
+@RequestMapping("/home")
 public class MainController {
 
-    @Autowired
-    GoodsService goodsService;
 
-    @RequestMapping(value = "/getAGoodsInfo")
-    public Goods selectById(@RequestParam Integer id){
-        return  goodsService.selectById(id);
+    private static Logger logger = LoggerFactory.getLogger(MainController.class);
+
+    /**
+     * 测试beetl模板
+     *
+     * @return
+     */
+    @RequestMapping("/add")
+    public ModelAndView home() {
+
+        ModelAndView modelAndView = new ModelAndView();
+        logger.info("add request");
+        modelAndView.addObject("email", "apk2sf@163.com");
+        modelAndView.setViewName("add");
+        return modelAndView;
     }
 
 }
