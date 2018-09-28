@@ -2,9 +2,7 @@ package com.example.cms.realm;
 
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.UserMapper;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -32,11 +30,16 @@ public class MyShiroRealm extends AuthorizingRealm {
         if(authenticationToken.getPrincipal() == null){
             return null;
         }
-
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //获取用户信息
         String username = authenticationToken.getPrincipal().toString();
         User user = userMapper.selectById(username);
-        return null;
+        if (null == user) {
+            return null;
+        } else {
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, user.getPassword().toString(), getName());
+            return simpleAuthenticationInfo;
+        }
     }
 }
 

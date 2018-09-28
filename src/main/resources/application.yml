@@ -13,5 +13,7 @@ server:
 
 #mybatis
 mybatis-plus:
-   mapper-locations: classpath*:/modules/mapper/**Mapper.xml
-   typeAliasesPackage: com.example.cms.modules.entity
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+  typeAliasesPackage: com.example.cms.modules.entity
+  configuration:
+      map-underscore-to-camel-case: true

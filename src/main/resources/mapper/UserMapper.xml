@@ -3,7 +3,17 @@
 
 <!-- 指明当前xml对应的Mapper -->
 <mapper namespace="com.example.cms.modules.mapper.UserMapper">
-    <select id="selectByUsername">
-        SELECT * FROM USER WHERE username = #{username}
+    <resultMap id="userResultMap" type="User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="gender" column="gender"/>
+        <result property="birth" column="birth"/>
+        <result property="email" column="email"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="selectByUsername" resultType="User">
+        SELECT * FROM user WHERE username = #{username}
     </select>
 </mapper>
