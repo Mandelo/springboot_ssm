@@ -1,4 +1,5 @@
-package com.example.demo;
+package com.example.cms.config;
+
 
 import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
@@ -25,12 +26,13 @@ public class BeetlConf {
     @Bean(name = "beetlViewResolver")
     public BeetlSpringViewResolver getBeetlSpringViewResolver(@Qualifier("beetlConfig") BeetlGroupUtilConfiguration beetlGroupUtilConfiguration) {
         BeetlSpringViewResolver beetlSpringViewResolver = new BeetlSpringViewResolver();
-        beetlSpringViewResolver.setPrefix("/templates/");
+       /* beetlSpringViewResolver.setPrefix("/");*/
         beetlSpringViewResolver.setSuffix(".html");
         beetlSpringViewResolver.setContentType("text/html;charset=UTF-8");
         beetlSpringViewResolver.setOrder(0);
         beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
         return beetlSpringViewResolver;
+
+
     }
 }
-

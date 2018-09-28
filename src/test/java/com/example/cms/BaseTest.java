@@ -1,8 +1,7 @@
-package com.example.demo;
+package com.example.cms;
 
-import com.example.demo.entity.User;
-import com.example.demo.mapper.UserMapper;
-import org.junit.Assert;
+import com.example.cms.modules.entity.User;
+import com.example.cms.modules.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class BaseTest{
 
 
     @Test
-    public void testSelect() {
+    public void testMybatisPlus() {
         System.out.println(("----- selectAll method test ------"));
         List<User>userList = userMapper.selectList(null);
         System.out.println(userList);

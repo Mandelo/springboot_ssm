@@ -22,6 +22,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <lombok.version>1.18.2</lombok.version>
+        <beetl.version>1.1.22.RELEASE</beetl.version>
+        <shiro.version>1.4.0</shiro.version>
+        <mysql.version>5.1.39</mysql.version>
+        <mybatisplusPlus.version>2.2.0</mybatisplusPlus.version>
+        <shiro-ehcache.version>1.4.0</shiro-ehcache.version>
     </properties>
 
     <dependencies>
@@ -32,13 +38,14 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
             <scope>runtime</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.2</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -47,17 +54,38 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!--不需要添加 Mybatis及Mybatis-Spring依赖，Mybatis-Plus会自动维护-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>2.2.0</version>
+            <version>${mybatisplusPlus.version}</version>
         </dependency>
         <dependency>
             <groupId>com.ibeetl</groupId>
             <artifactId>beetl-framework-starter</artifactId>
-            <version>1.1.22.RELEASE</version>
+            <version>${beetl.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+         <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro-ehcache.version}</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
