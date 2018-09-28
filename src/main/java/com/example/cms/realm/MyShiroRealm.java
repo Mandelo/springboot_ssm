@@ -25,6 +25,11 @@ public class MyShiroRealm extends AuthorizingRealm {
         return null;
     }
 
+    /**
+     * @Description: 登录
+     * @Param [authenticationToken]
+     * @Return org.apache.shiro.authc.AuthenticationInfo
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         if(authenticationToken.getPrincipal() == null){
