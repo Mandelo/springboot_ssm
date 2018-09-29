@@ -32,10 +32,10 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        if(authenticationToken.getPrincipal() == null){
+        if (authenticationToken.getPrincipal() == null) {
             return null;
         }
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+        // UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //获取用户信息
         String username = authenticationToken.getPrincipal().toString();
         User user = userMapper.selectById(username);

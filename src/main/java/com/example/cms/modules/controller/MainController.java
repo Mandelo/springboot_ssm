@@ -17,10 +17,15 @@ public class MainController {
 
     private static Logger logger = LoggerFactory.getLogger(MainController.class);
 
-    /*@RequestMapping(value ="index")
-    public String indexPage() {
-        return "static/index.html";
-    }*/
+       @RequestMapping(value ="index")
+       public String indexPage() {
+           return "static/index";
+       }
+
+    @RequestMapping(value = "login")
+    public String loginPage() {
+        return "static/login";
+    }
 
 }
 

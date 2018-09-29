@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Date 2018-09-28 15:59
  * @Version 1.0
  */
-@Configuration
+/*@Configuration
 public class DefaultViewConf extends WebMvcConfigurationSupport {
 
     @Override
@@ -20,5 +20,5 @@ public class DefaultViewConf extends WebMvcConfigurationSupport {
         registry.addViewController("/").setViewName("static/index");
     }
 
-}
+}*/
 
