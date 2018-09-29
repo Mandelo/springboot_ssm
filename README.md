@@ -1,2 +1,2 @@
 # springboot_ssm
-springboot ssm mybatisPlus beetl
+Inspired by <a href="https://github.com/stylefeng/Guns">Guns</a>.And trying to learn its design :)
