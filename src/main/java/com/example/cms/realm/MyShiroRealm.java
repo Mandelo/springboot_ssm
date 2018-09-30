@@ -35,7 +35,6 @@ public class MyShiroRealm extends AuthorizingRealm {
         if (authenticationToken.getPrincipal() == null) {
             return null;
         }
-        // UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //获取用户信息
         String username = authenticationToken.getPrincipal().toString();
         User user = userMapper.selectById(username);
@@ -46,5 +45,7 @@ public class MyShiroRealm extends AuthorizingRealm {
             return simpleAuthenticationInfo;
         }
     }
+
+
 }
 
