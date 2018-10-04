@@ -19,9 +19,10 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
+
     @Override
-    public User selectByUsername(String username) {
-        return userMapper.selectByUsername(username);
+    public User selectByAccount(String account) {
+        return null;
     }
 }
 

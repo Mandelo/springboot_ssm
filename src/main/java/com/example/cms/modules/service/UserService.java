@@ -13,5 +13,5 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public interface UserService {
 
-    User selectByUsername(String username);
+    User selectByAccount(String account);
 }

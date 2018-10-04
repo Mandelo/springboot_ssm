@@ -47,8 +47,8 @@ public class BaseTest{
      * @Return void
      */
     @Test
-    public void testSelectByName() {
-        User user = userMapper.selectByUsername("admin");
+    public void testSelectByAccount() {
+        User user = userMapper.selectByAccount("admin");
         log.info("\n----------------------->" + user.toString() + "<----------------------------");
     }
 }

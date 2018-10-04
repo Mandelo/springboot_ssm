@@ -1,9 +1,11 @@
 package com.example.cms.realm;
 
+import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.UserMapper;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,17 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Autowired
     private UserMapper userMapper;
 
+    
+    /**
+    *  @Description: 授权
+    *  @Param [principalCollection]
+    *  @Return org.apache.shiro.authz.AuthorizationInfo
+    */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+        User user = (User) principalCollection.getPrimaryPrincipal();
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+
         return null;
     }
 

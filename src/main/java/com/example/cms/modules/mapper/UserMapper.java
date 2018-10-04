@@ -12,5 +12,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface UserMapper extends BaseMapper<User>{
 
-    User selectByUsername(String username);
+    User selectByAccount(String account);
 }

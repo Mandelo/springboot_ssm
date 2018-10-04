@@ -88,6 +88,11 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.2.4</version>
         </dependency>
+        <dependency>
+            <groupId>org.xmlunit</groupId>
+            <artifactId>xmlunit-core</artifactId>
+            <version>2.5.1</version>
+        </dependency>
 
 
     </dependencies>
