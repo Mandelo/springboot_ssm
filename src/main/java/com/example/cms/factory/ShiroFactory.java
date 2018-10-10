@@ -1,5 +1,6 @@
 package com.example.cms.factory;
 
+import com.example.cms.Util.Convert;
 import com.example.cms.Util.SpringContextHolder;
 import com.example.cms.modules.entity.Dept;
 import com.example.cms.modules.entity.ShiroUser;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,8 +61,16 @@ public class ShiroFactory implements IShiro {
         shiroUser.setDeptId(user.getDeptid());
         shiroUser.setDeptName(dept.getFullname());
         shiroUser.setName(user.getName());
+        Integer[] roleArray = Convert.toIntRoleArray(user.getRoleId());
+        List<Integer> roleList = new ArrayList<Integer>();
+        List<String> roleNameList = new ArrayList<String>();
+        for (int roleId : roleArray) {
+            roleList.add(roleId);
+            roleNameList.add(ConstantFactory.me().getSingleRoleName(roleId));
+        }
+        shiroUser.setRoleList(roleList);
+        shiroUser.setRoleNames(roleNameList);
 
-        //Integer[] roleArray = Convert.toIntArray(user.getRoleid());
         return null;
     }
 
