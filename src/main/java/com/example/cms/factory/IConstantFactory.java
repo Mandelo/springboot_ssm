@@ -10,4 +10,6 @@ package com.example.cms.factory;
 public interface IConstantFactory {
 
     String getSingleRoleName(Integer roleId);
+
+    String getSaltByAccount(String account);
 }

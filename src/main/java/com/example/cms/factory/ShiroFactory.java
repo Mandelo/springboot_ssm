@@ -24,15 +24,13 @@ import java.util.List;
  * @Version 1.0
  */
 @Service
-@DependsOn("SpringContextHolder")
+@DependsOn("springContextHolder")
 @Transactional(readOnly = true)
 public class ShiroFactory implements IShiro {
 
-    @Autowired
-    private UserMapper userMapper;
+    private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
 
-    @Autowired
-    private DeptMapper deptMapper;
+    private DeptMapper deptMapper = SpringContextHolder.getBean(DeptMapper.class);
 
     public static IShiro me() {
         return SpringContextHolder.getBean(IShiro.class);
@@ -54,11 +52,11 @@ public class ShiroFactory implements IShiro {
 //TODO
     @Override
     public ShiroUser shiroUser(User user) {
-        ShiroUser shiroUser = new ShiroUser();
+      ShiroUser shiroUser = new ShiroUser();
         shiroUser.setId(user.getId());
         Dept dept = deptMapper.selectById(user.getId());
         shiroUser.setAccount(user.getAccount());
-        shiroUser.setDeptId(user.getDeptid());
+        shiroUser.setDeptId(user.getDeptId());
         shiroUser.setDeptName(dept.getFullname());
         shiroUser.setName(user.getName());
         Integer[] roleArray = Convert.toIntRoleArray(user.getRoleId());
@@ -70,8 +68,7 @@ public class ShiroFactory implements IShiro {
         }
         shiroUser.setRoleList(roleList);
         shiroUser.setRoleNames(roleNameList);
-
-        return null;
+        return shiroUser;
     }
 
     @Override

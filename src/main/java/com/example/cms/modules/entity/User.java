@@ -27,6 +27,6 @@ public class User implements Serializable {
     private String roleId;//角色id
     private Integer status;// 状态(1：启用  2：冻结  3：删除）
     private Date createTime;//创建时间
-    private Integer deptid;//部门id
+    private Integer deptId;//部门id
 
 }

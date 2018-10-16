@@ -1,5 +1,11 @@
 package com.example.cms;
 
+import com.example.cms.Util.SpringContextHolder;
+import com.example.cms.factory.ConstantFactory;
+import com.example.cms.factory.IConstantFactory;
+import com.example.cms.factory.IShiro;
+import com.example.cms.factory.ShiroFactory;
+import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.UserMapper;
 import org.junit.Test;
@@ -21,11 +27,11 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BaseTest{
+public class BaseTest {
 
 
     @Autowired
-    private UserMapper userMapper;
+    UserMapper userMapper;
 
     Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -50,6 +56,31 @@ public class BaseTest{
     public void testSelectByAccount() {
         User user = userMapper.selectByAccount("admin");
         log.info("\n----------------------->" + user.toString() + "<----------------------------");
+    }
+
+    /**
+     * @Description: 测试静态工厂方法
+     * @Param []
+     * @Return void
+     */
+    @Test
+    public void testConstantFactory() {
+        IConstantFactory constantFactory = ConstantFactory.me();
+        String salt = constantFactory.getSaltByAccount("admin");
+        System.out.println(salt + "-------------测试静态工厂方法--------------------");
+    }
+
+    /**
+    *  @Description: 测试shiroFactory工厂
+    *  @Param []
+    *  @Return void
+    */
+    @Test
+    public void testShiroFactory() {
+        IShiro iShiro = ShiroFactory.me();
+        User user = userMapper.selectByAccount("admin");
+        ShiroUser shiroUser = iShiro.shiroUser(user);
+        System.out.println(shiroUser);
     }
 }
 

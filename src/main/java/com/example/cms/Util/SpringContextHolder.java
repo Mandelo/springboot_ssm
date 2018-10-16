@@ -3,6 +3,7 @@ package com.example.cms.Util;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * @ClassName SpringContextHolder
@@ -11,6 +12,7 @@ import org.springframework.context.ApplicationContextAware;
  * @Date 2018-10-04 22:04
  * @Version 1.0
  */
+@Component
 public class SpringContextHolder implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
@@ -43,4 +45,3 @@ public class SpringContextHolder implements ApplicationContextAware {
     }
 
 }
-
