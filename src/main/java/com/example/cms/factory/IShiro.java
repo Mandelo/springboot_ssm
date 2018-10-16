@@ -34,7 +34,7 @@ public interface IShiro {
     *  @Param [roleId]
     *  @Return java.util.List<java.lang.String>
     */
-    List<String> findPermissionsByRoleUd(Integer roleId);
+    List<String> findPermissionsByRoleId(Integer roleId);
 
     /**
     *  @Description: 根据角色id获取角色名称
