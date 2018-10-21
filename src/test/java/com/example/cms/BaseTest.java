@@ -1,6 +1,5 @@
 package com.example.cms;
 
-import com.example.cms.Util.SpringContextHolder;
 import com.example.cms.factory.ConstantFactory;
 import com.example.cms.factory.IConstantFactory;
 import com.example.cms.factory.IShiro;
@@ -71,13 +70,13 @@ public class BaseTest {
     }
 
     /**
-    *  @Description: 测试shiroFactory工厂
-    *  @Param []
-    *  @Return void
-    */
+     * @Description: 测试shiroFactory工厂
+     * @Param []
+     * @Return void
+     */
     @Test
     public void testShiroFactory() {
-        IShiro iShiro = ShiroFactory.me();
+        IShiro iShiro = ShiroFactory.me();//
         User user = userMapper.selectByAccount("admin");
         ShiroUser shiroUser = iShiro.shiroUser(user);
         System.out.println(shiroUser);

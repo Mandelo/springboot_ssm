@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * @ClassName ShiroFactory
- * @Description : TODO
+ * @Description : shiro工厂
  * @Author losh
  * @Date 2018-10-04 21:50
  * @Version 1.0
@@ -49,10 +49,10 @@ public class ShiroFactory implements IShiro {
         return user;
     }
 
-//TODO
+    //TODO
     @Override
     public ShiroUser shiroUser(User user) {
-      ShiroUser shiroUser = new ShiroUser();
+        ShiroUser shiroUser = new ShiroUser();
         shiroUser.setId(user.getId());
         Dept dept = deptMapper.selectById(user.getId());
         shiroUser.setAccount(user.getAccount());
@@ -72,7 +72,7 @@ public class ShiroFactory implements IShiro {
     }
 
     @Override
-    public List<String> findPermissionsByRoleUd(Integer roleId) {
+    public List<String> findPermissionsByRoleId(Integer roleId) {
         return null;
     }
 
