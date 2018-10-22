@@ -4,8 +4,10 @@ import com.example.cms.factory.ConstantFactory;
 import com.example.cms.factory.IConstantFactory;
 import com.example.cms.factory.IShiro;
 import com.example.cms.factory.ShiroFactory;
+import com.example.cms.modules.entity.Dept;
 import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
+import com.example.cms.modules.mapper.DeptMapper;
 import com.example.cms.modules.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,9 @@ public class BaseTest {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    DeptMapper deptMapper;
 
     Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -80,6 +85,17 @@ public class BaseTest {
         User user = userMapper.selectByAccount("admin");
         ShiroUser shiroUser = iShiro.shiroUser(user);
         System.out.println(shiroUser);
+    }
+
+    /**
+    *  @Description: 测试deptMapper
+    *  @Param []
+    *  @Return void
+    */
+    @Test
+    public void testDeptDao(){
+       Dept dept =  deptMapper.selectById(1);
+        System.out.println(dept);
     }
 }
 
