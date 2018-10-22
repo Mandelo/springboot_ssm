@@ -8,7 +8,7 @@ import org.apache.shiro.subject.Subject;
 
 /**
  * @ClassName LoginController
- * @Description : TODO
+ * @Description : 登录控制器
  * @Author losh
  * @Date 2018-10-22 10:52
  * @Version 1.0
