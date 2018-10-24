@@ -68,12 +68,12 @@ public class MyShiroRealm extends AuthorizingRealm {
             return null;
         }
         //获取用户信息
-        String username = authenticationToken.getPrincipal().toString();
-        User user = userMapper.selectById(username);
+        String account = authenticationToken.getPrincipal().toString();
+        User user = userMapper.selectByAccount(account);
         if (null == user) {
             return null;
         } else {
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(username, user.getPassword().toString(), getName());
+            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(account, user.getPassword().toString(), getName());
             return simpleAuthenticationInfo;
         }
     }
