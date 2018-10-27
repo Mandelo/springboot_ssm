@@ -6,6 +6,7 @@ import com.example.cms.modules.entity.Dept;
 import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.DeptMapper;
+import com.example.cms.modules.mapper.MenuMapper;
 import com.example.cms.modules.mapper.UserMapper;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class ShiroFactory implements IShiro {
     private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
 
     private DeptMapper deptMapper = SpringContextHolder.getBean(DeptMapper.class);
+
+    private MenuMapper menuMapper  = SpringContextHolder.getBean(MenuMapper.class);
 
     public static IShiro me() {
         return SpringContextHolder.getBean(IShiro.class);
@@ -73,7 +76,8 @@ public class ShiroFactory implements IShiro {
 
     @Override
     public List<String> findPermissionsByRoleId(Integer roleId) {
-        return null;
+
+        return menuMapper.getResUrlsByRoleId(roleId);
     }
 
     @Override
