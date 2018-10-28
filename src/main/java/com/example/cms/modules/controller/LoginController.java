@@ -1,13 +1,13 @@
 package com.example.cms.modules.controller;
 
 import com.example.cms.Util.HttpKit;
-import com.example.cms.Util.ShiroKit;
 import com.example.cms.factory.ShiroFactory;
 import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.UserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,8 @@ public class LoginController {
         currentUser.login(token);
         Session session = currentUser.getSession();
         User user = userMapper.selectByAccount(account);
-        ShiroUser shiroUser = ShiroFactory.me().shiroUser(user);
+        ShiroUser shiroUser = ShiroFactory.me().convToShiroUser(user);
+        System.out.println("\n"+shiroUser);
         session.setAttribute("shiroUser", shiroUser);
         session.setAttribute("account", shiroUser.getAccount());
        // System.out.println(shiroUser);

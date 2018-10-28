@@ -14,8 +14,4 @@
         <result column="version" property="version"/>
     </resultMap>
 
-    <select id="selectById" resultMap="BaseResultMap">
-      SELECT * FROM  dept WHERE id = #{id}
-    </select>
-
 </mapper>

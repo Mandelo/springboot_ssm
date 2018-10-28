@@ -5,9 +5,12 @@ import com.example.cms.factory.IConstantFactory;
 import com.example.cms.factory.IShiro;
 import com.example.cms.factory.ShiroFactory;
 import com.example.cms.modules.entity.Dept;
+import com.example.cms.modules.entity.Role;
 import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.DeptMapper;
+import com.example.cms.modules.mapper.MenuMapper;
+import com.example.cms.modules.mapper.RoleMapper;
 import com.example.cms.modules.mapper.UserMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +39,12 @@ public class BaseTest {
 
     @Autowired
     DeptMapper deptMapper;
+
+    @Autowired
+    MenuMapper menuMapper;
+
+    @Autowired
+    RoleMapper roleMapper;
 
     Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -83,7 +92,7 @@ public class BaseTest {
     public void testShiroFactory() {
         IShiro iShiro = ShiroFactory.me();//
         User user = userMapper.selectByAccount("admin");
-        ShiroUser shiroUser = iShiro.shiroUser(user);
+        ShiroUser shiroUser = iShiro.convToShiroUser(user);
         System.out.println(shiroUser);
     }
 
@@ -96,6 +105,21 @@ public class BaseTest {
     public void testDeptDao(){
        Dept dept =  deptMapper.selectById(1);
         System.out.println(dept);
+    }
+
+    @Test
+    public void testFindPermissionByRoleId(){
+        IShiro iShiro = ShiroFactory.me();
+       List<String> l =  iShiro.findPermissionsByRoleId(1);
+        System.out.println("\n");
+        System.out.println("---------------------------------------------"+l+"--------------------------");
+    }
+
+    @Test
+    public void testRoleMapper(){
+        IConstantFactory constantFactory = ConstantFactory.me();
+       String roleName =  constantFactory.getSingleRoleName(1);
+        log.info("\n"+roleName);
     }
 }
 

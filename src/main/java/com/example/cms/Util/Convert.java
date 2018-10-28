@@ -21,7 +21,6 @@ public class Convert {
         Integer [] IntArr = new Integer[StrArr.length];
         for(int i = 0;i < StrArr.length;i++){
             IntArr[i] = Integer.valueOf(StrArr[i]);
-            System.out.println(IntArr[i]);
         }
         return IntArr;
     }

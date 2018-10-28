@@ -12,4 +12,6 @@ public interface IConstantFactory {
     String getSingleRoleName(Integer roleId);
 
     String getSaltByAccount(String account);
+
+     String getSingleRoleTip(Integer roleId);
 }

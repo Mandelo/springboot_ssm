@@ -54,7 +54,7 @@ public class ShiroFactory implements IShiro {
 
     //TODO
     @Override
-    public ShiroUser shiroUser(User user) {
+    public ShiroUser convToShiroUser(User user) {
         ShiroUser shiroUser = new ShiroUser();
         shiroUser.setId(user.getId());
         Dept dept = deptMapper.selectById(user.getId());
@@ -82,7 +82,8 @@ public class ShiroFactory implements IShiro {
 
     @Override
     public String findRoleNameByRoleId(Integer roleId) {
-        return null;
+
+        return ConstantFactory.me().getSingleRoleName(roleId);
     }
 
     @Override

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cms.modules.mapper.MenuMapper">
+    <resultMap id="BaseResultMap" type="com.example.cms.modules.entity.Menu">
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="pcode" property="pcode" />
+        <result column="pcodes" property="pcodes" />
+        <result column="name" property="name" />
+        <result column="icon" property="icon" />
+        <result column="url" property="url" />
+        <result column="num" property="num" />
+        <result column="levels" property="levels" />
+        <result column="ismenu" property="ismenu" />
+        <result column="tips" property="tips" />
+        <result column="status" property="status" />
+        <result column="isopen" property="isopen" />
+    </resultMap>
+
+    <select id="getResUrlsByRoleId" resultType="string">
+        select url from
+        relation rel
+        inner join menu m on rel.menuid = m.id
+        where rel.roleid = #{roleId}
+    </select>
+</mapper>

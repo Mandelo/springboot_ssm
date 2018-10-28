@@ -28,7 +28,6 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Autowired
     private UserMapper userMapper;
 
-
     /**
      * @Description: 授权
      * @Param [principalCollection]
@@ -36,22 +35,28 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         IShiro shiroFactory = ShiroFactory.me();
-        ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+        String account = (String) principals.getPrimaryPrincipal();
+        User user = userMapper.selectByAccount(account);
+        ShiroUser shiroUser = shiroFactory.convToShiroUser(user);
         List<Integer> roleList = shiroUser.getRoleList();
-
         Set<String> permissionSet = new HashSet<>();
         Set<String> roleNameSet = new HashSet<>();
 
         for (Integer roleId : roleList) {
             List<String> permissions = shiroFactory.findPermissionsByRoleId(roleId);
-            for (String permission : permissions) {
-                permissionSet.add(permission);
+            if (permissions != null) {
+                for (String permission : permissions) {
+                    permissionSet.add(permission);
+                    System.out.println("\n" + "permission:" + permission);
+                }
             }
             String roleName = shiroFactory.findRoleNameByRoleId(roleId);
             roleNameSet.add(roleName);
+            System.out.println("\n"+"roleName:"+roleName);
         }
-        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+
         info.addStringPermissions(permissionSet);
         info.addRoles(roleNameSet);
         return info;

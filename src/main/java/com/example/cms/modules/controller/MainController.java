@@ -1,5 +1,9 @@
 package com.example.cms.modules.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -24,10 +28,30 @@ public class MainController {
            return "static/index";
        }
 
+
     @RequestMapping(value = "login")
     public String loginPage() {
         return "static/login";
     }
+
+    @RequestMapping(value = "un")
+    public String error() {
+        return "static/error";
+    }
+
+    @RequiresPermissions("#")
+    @RequestMapping(value = "admin")
+    public String adminPage(){
+        Subject subject = SecurityUtils.getSubject();
+        return "static/admin";
+    }
+
+    @RequiresPermissions("/user")
+    @RequestMapping(value = "user")
+    public String userPage(){
+        return "static/user";
+    }
+
 
 }
 

@@ -13,4 +13,6 @@ import org.springframework.stereotype.Component;
 public interface UserMapper extends BaseMapper<User>{
 
     User selectByAccount(String account);
+
+
 }

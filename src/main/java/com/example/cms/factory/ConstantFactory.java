@@ -1,9 +1,10 @@
 package com.example.cms.factory;
 
 import com.example.cms.Util.SpringContextHolder;
+import com.example.cms.modules.entity.Role;
 import com.example.cms.modules.entity.User;
+import com.example.cms.modules.mapper.RoleMapper;
 import com.example.cms.modules.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
@@ -18,17 +19,37 @@ import org.springframework.stereotype.Component;
 @DependsOn("springContextHolder")
 public class ConstantFactory implements IConstantFactory {
 
-    @Autowired
-    UserMapper userMapper;
+    private RoleMapper roleMapper = SpringContextHolder.getBean(RoleMapper.class);
+
+    private UserMapper userMapper = SpringContextHolder.getBean(UserMapper.class);
+
     @Override
     public String getSingleRoleName(Integer roleId) {
-        return null;
+        if (0 == roleId) {
+            return "--";
+        }
+        Role role = roleMapper.selectById(roleId);
+        return role.getName();
     }
 
     @Override
     public String getSaltByAccount(String account) {
         User user = userMapper.selectByAccount(account);
         return user.getSalt();
+    }
+
+    /**
+     * @Description: 通过角色id获取角色英文名称
+     * @Param [roleId]
+     * @Return java.lang.String
+     */
+    @Override
+    public String getSingleRoleTip(Integer roleId) {
+        if (0 == roleId) {
+            return "--";
+        }
+        Role role = roleMapper.selectById(roleId);
+        return role.getTips();
     }
 
     public static IConstantFactory me() {

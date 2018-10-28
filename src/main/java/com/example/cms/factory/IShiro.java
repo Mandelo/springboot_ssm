@@ -27,7 +27,7 @@ public interface IShiro {
     *  @Param [user]
     *  @Return com.example.cms.modules.entity.ShiroUser
     */
-    ShiroUser shiroUser(User user);
+    ShiroUser convToShiroUser(User user);
 
     /**
     *  @Description: 通过角色Id获取权限列表
