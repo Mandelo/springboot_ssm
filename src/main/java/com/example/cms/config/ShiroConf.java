@@ -56,12 +56,10 @@ public class ShiroConf {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         shiroFilter.setLoginUrl("/login");
-        shiroFilter.setUnauthorizedUrl("/un");
         //优先级从上到下降低
         Map<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("/test", "anon");
         hashMap.put("/**", "authc");
-        shiroFilter.setSuccessUrl("/index");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;
     }

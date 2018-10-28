@@ -32,7 +32,5 @@ public class BeetlConf {
         beetlSpringViewResolver.setOrder(0);
         beetlSpringViewResolver.setConfig(beetlGroupUtilConfiguration);
         return beetlSpringViewResolver;
-
-
     }
 }

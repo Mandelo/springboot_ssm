@@ -7,7 +7,6 @@ import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.UserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class LoginController {
         session.setAttribute("shiroUser", shiroUser);
         session.setAttribute("account", shiroUser.getAccount());
        // System.out.println(shiroUser);
-        return "static/loginSuccess";
+        return "templates/loginSuccess";
     }
 }
 
