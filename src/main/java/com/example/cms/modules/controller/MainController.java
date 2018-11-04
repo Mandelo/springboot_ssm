@@ -23,35 +23,15 @@ public class MainController {
 
     private static Logger logger = LoggerFactory.getLogger(MainController.class);
 
-       @RequestMapping(value ="index")
+       @RequestMapping(value ="/index")
        public String indexPage() {
            return "static/index";
        }
 
 
-    @RequestMapping(value = "login")
+    @RequestMapping(value = "/login")
     public String loginPage() {
-        return "static/login";
+        return "static/loginPage";
     }
-
-    @RequestMapping(value = "un")
-    public String error() {
-        return "static/error";
-    }
-
-    @RequiresPermissions("#")
-    @RequestMapping(value = "admin")
-    public String adminPage(){
-        Subject subject = SecurityUtils.getSubject();
-        return "static/admin";
-    }
-
-    @RequiresPermissions("/user")
-    @RequestMapping(value = "user")
-    public String userPage(){
-        return "static/user";
-    }
-
-
 }
 

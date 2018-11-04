@@ -9,6 +9,8 @@ import com.example.cms.modules.mapper.DeptMapper;
 import com.example.cms.modules.mapper.MenuMapper;
 import com.example.cms.modules.mapper.UserMapper;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
@@ -43,11 +45,9 @@ public class ShiroFactory implements IShiro {
     @Override
     public User user(String account) {
         User user = userMapper.selectByAccount(account);
-        if (null == user) {
-            System.out.println("ERROR");
-        }
-        if (user.getStatus() == 2) {
-            System.out.println("ERROR");
+       if (null == user) {
+            System.out.println("用户不存在");
+           return null;
         }
         return user;
     }
@@ -88,7 +88,13 @@ public class ShiroFactory implements IShiro {
 
     @Override
     public SimpleAuthenticationInfo info(ShiroUser shiroUser, User user, String realmName) {
-        return null;
+        String credentials = user.getPassword();
+
+        // 密码加盐处理
+        String source = user.getSalt();
+        ByteSource credentialsSalt = new Md5Hash(source);
+        return new SimpleAuthenticationInfo(shiroUser, credentials, credentialsSalt, realmName);
     }
+
 }
 

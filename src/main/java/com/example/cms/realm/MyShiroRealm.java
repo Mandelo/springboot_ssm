@@ -69,7 +69,15 @@ public class MyShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        if (authenticationToken.getPrincipal() == null) {
+        IShiro shiroFactory = ShiroFactory.me();
+        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+       User user = shiroFactory.user("admin");
+        //User user = userMapper.selectByAccount(token.getUsername());
+        System.out.println(user);
+        ShiroUser shiroUser = shiroFactory.convToShiroUser(user);
+        return shiroFactory.info(shiroUser,user,super.getName());
+        //return null;
+        /*     if (authenticationToken.getPrincipal() == null) {
             return null;
         }
         //获取用户信息
@@ -81,8 +89,8 @@ public class MyShiroRealm extends AuthorizingRealm {
             SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(account, user.getPassword().toString(), getName());
             return simpleAuthenticationInfo;
         }
+    }*/
+
     }
-
-
 }
 

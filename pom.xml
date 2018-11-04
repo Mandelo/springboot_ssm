@@ -29,8 +29,12 @@
         <mybatisplusPlus.version>2.2.0</mybatisplusPlus.version>
         <shiro-ehcache.version>1.4.0</shiro-ehcache.version>
     </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

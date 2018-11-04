@@ -58,7 +58,8 @@ public class ShiroConf {
         shiroFilter.setLoginUrl("/login");
         //优先级从上到下降低
         Map<String, String> hashMap = new HashMap<String, String>();
-        hashMap.put("/test", "anon");
+        hashMap.put("/doLogin", "anon");
+        hashMap.put("/static/**", "anon");
         hashMap.put("/**", "authc");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;

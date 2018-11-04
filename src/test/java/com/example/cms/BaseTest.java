@@ -5,8 +5,6 @@ import com.example.cms.factory.IConstantFactory;
 import com.example.cms.factory.IShiro;
 import com.example.cms.factory.ShiroFactory;
 import com.example.cms.modules.entity.Dept;
-import com.example.cms.modules.entity.Role;
-import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.DeptMapper;
 import com.example.cms.modules.mapper.MenuMapper;
@@ -90,10 +88,9 @@ public class BaseTest {
      */
     @Test
     public void testShiroFactory() {
-        IShiro iShiro = ShiroFactory.me();//
-        User user = userMapper.selectByAccount("admin");
-        ShiroUser shiroUser = iShiro.convToShiroUser(user);
-        System.out.println(shiroUser);
+        IShiro shiroFactory = ShiroFactory.me();//
+        User user = shiroFactory.user("admin");
+        System.out.println(user);
     }
 
     /**
@@ -120,6 +117,12 @@ public class BaseTest {
         IConstantFactory constantFactory = ConstantFactory.me();
        String roleName =  constantFactory.getSingleRoleName(1);
         log.info("\n"+roleName);
+    }
+
+    @Test
+    public void testUserMapper(){
+        User user = userMapper.selectByAccount("admin");
+        System.out.println(user);
     }
 }
 
