@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @ClassName SessionIntereceptor
+ * @ClassName SessionIntereceptor 拦截自动登录
  * @Description : TODO
  * @Author losh
  * @Date 2018-11-09 21:38
@@ -27,26 +27,16 @@ import javax.servlet.http.HttpServletResponse;
 public class SessionInterceptor implements HandlerInterceptor {
     private final Logger logger = LoggerFactory.getLogger(SessionInterceptor.class);
 
-    @Autowired
-    UserMapper userMapper;
-
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         logger.info("---preHandle---");
-        IShiro shiroFactory = ShiroFactory.me();
         Subject currentUser = SecurityUtils.getSubject();
         //判断用户是通过记住我功能自动登录,此时session失效
         if (!currentUser.isAuthenticated() && currentUser.isRemembered()) {
-            User user = (User) currentUser.getPrincipal();
-            ShiroUser shiroUser = shiroFactory.convToShiroUser(user);
-            String account = user.getAccount();
-            String password = user.getPassword();
-            UsernamePasswordToken token = new UsernamePasswordToken(account, password);
-            System.out.println(user);
-            token.setRememberMe(true);
+            //默认获取info第一个参数即shiroUser
+            ShiroUser shiroUser = (ShiroUser) currentUser.getPrincipal();
             Session session = currentUser.getSession();
             session.setAttribute("shiroUser", shiroUser);
-
         }
         return true;
     }

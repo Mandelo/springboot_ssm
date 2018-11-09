@@ -57,7 +57,7 @@ public class MyShiroRealm extends AuthorizingRealm {
             }
             String roleName = shiroFactory.findRoleNameByRoleId(roleId);
             roleNameSet.add(roleName);
-            System.out.println("\n"+"roleName:"+roleName);
+            System.out.println("\n" + "roleName:" + roleName);
         }
 
         info.addStringPermissions(permissionSet);
@@ -74,26 +74,11 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         IShiro shiroFactory = ShiroFactory.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-       //User user = shiroFactory.user("admin");
         User user = userMapper.selectByAccount(token.getUsername());
         ShiroUser shiroUser = shiroFactory.convToShiroUser(user);
-        return shiroFactory.info(shiroUser,user,super.getName());
-        //return null;
-        /*     if (authenticationToken.getPrincipal() == null) {
-            return null;
-        }
-        //获取用户信息
-        String account = authenticationToken.getPrincipal().toString();
-        User user = userMapper.selectByAccount(account);
-        if (null == user) {
-            return null;
-        } else {
-            SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(account, user.getPassword().toString(), getName());
-            return simpleAuthenticationInfo;
-        }
-    }*/
-
+        return shiroFactory.info(shiroUser, user, super.getName());
     }
+
     @Override
     public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
         HashedCredentialsMatcher md5CredentialsMatcher = new HashedCredentialsMatcher();
@@ -101,6 +86,6 @@ public class MyShiroRealm extends AuthorizingRealm {
         md5CredentialsMatcher.setHashIterations(ShiroKit.hashIterations);
         super.setCredentialsMatcher(md5CredentialsMatcher);
 
-}
+    }
 }
 
