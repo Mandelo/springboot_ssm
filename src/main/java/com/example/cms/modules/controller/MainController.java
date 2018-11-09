@@ -33,5 +33,10 @@ public class MainController {
     public String loginPage() {
         return "static/loginPage";
     }
+
+    @RequestMapping(value = "/success")
+    public String successPage() {
+        return "static/success";
+    }
 }
 

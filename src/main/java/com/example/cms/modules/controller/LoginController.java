@@ -29,14 +29,13 @@ public class LoginController {
     @Autowired
     UserMapper userMapper;
 
-    @ResponseBody
     @RequestMapping(value = "doLogin", method = RequestMethod.POST)
     public String login() {
         String account = HttpKit.getRequest().getParameter("account");
         String password = HttpKit.getRequest().getParameter("password");
         UsernamePasswordToken token = new UsernamePasswordToken(account, password);
         Subject currentUser = SecurityUtils.getSubject();
-        System.out.println(currentUser.toString());
+        token.setRememberMe(true);
         currentUser.login(token);
         Session session = currentUser.getSession();
         User user = userMapper.selectByAccount(account);
@@ -44,7 +43,7 @@ public class LoginController {
         session.setAttribute("shiroUser", shiroUser);
         session.setAttribute("account", shiroUser.getAccount());
         System.out.println(shiroUser);
-        return "success";
+        return "redirect:/success";
     }
 }
 

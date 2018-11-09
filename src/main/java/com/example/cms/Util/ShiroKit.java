@@ -2,7 +2,10 @@ package com.example.cms.Util;
 
 import com.example.cms.modules.entity.ShiroUser;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 
 /**
  * @ClassName ShiroKit
@@ -12,6 +15,17 @@ import org.apache.shiro.subject.Subject;
  * @Version 1.0
  */
 public class ShiroKit {
+    private static final String NAMES_DELIMETER = ",";
+
+    /**
+     * 加盐参数
+     */
+    public final static String hashAlgorithmName = "MD5";
+
+    /**
+     * 循环次数
+     */
+    public final static int hashIterations = 1024;
 
     /**
      * @Description: 获取当前subject
@@ -22,14 +36,9 @@ public class ShiroKit {
         return SecurityUtils.getSubject();
     }
 
-    /**
-     * @Description: 获取封装的 ShiroUser
-     * @Param []
-     * @Return com.example.cms.modules.entity.ShiroUser
-     */
-  /*  public static ShiroUser getUser() {
-
-        return (ShiroUser) getSubject().getPrincipals().getPrimaryPrincipal();
-    }*/
+    public static String md5(String credentials, String saltSource) {
+        ByteSource salt = new Md5Hash(saltSource);
+        return new SimpleHash(hashAlgorithmName, credentials, salt, hashIterations).toString();
+    }
 }
 

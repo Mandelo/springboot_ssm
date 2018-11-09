@@ -1,11 +1,14 @@
 package com.example.cms.realm;
 
+import com.example.cms.Util.ShiroKit;
 import com.example.cms.factory.IShiro;
 import com.example.cms.factory.ShiroFactory;
 import com.example.cms.modules.entity.ShiroUser;
 import com.example.cms.modules.entity.User;
 import com.example.cms.modules.mapper.UserMapper;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -71,9 +74,8 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         IShiro shiroFactory = ShiroFactory.me();
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-       User user = shiroFactory.user("admin");
-        //User user = userMapper.selectByAccount(token.getUsername());
-        System.out.println(user);
+       //User user = shiroFactory.user("admin");
+        User user = userMapper.selectByAccount(token.getUsername());
         ShiroUser shiroUser = shiroFactory.convToShiroUser(user);
         return shiroFactory.info(shiroUser,user,super.getName());
         //return null;
@@ -92,5 +94,13 @@ public class MyShiroRealm extends AuthorizingRealm {
     }*/
 
     }
+    @Override
+    public void setCredentialsMatcher(CredentialsMatcher credentialsMatcher) {
+        HashedCredentialsMatcher md5CredentialsMatcher = new HashedCredentialsMatcher();
+        md5CredentialsMatcher.setHashAlgorithmName(ShiroKit.hashAlgorithmName);
+        md5CredentialsMatcher.setHashIterations(ShiroKit.hashIterations);
+        super.setCredentialsMatcher(md5CredentialsMatcher);
+
+}
 }
 

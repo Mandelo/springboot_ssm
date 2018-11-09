@@ -40,7 +40,8 @@ public class ShiroConf {
     @Bean
     public DefaultWebSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(this.myShiroRealm());
+        securityManager.setRealm(myShiroRealm());
+        securityManager.setRememberMeManager(rememberMeManager());
         return securityManager;
     }
 
@@ -60,7 +61,7 @@ public class ShiroConf {
         Map<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("/doLogin", "anon");
         hashMap.put("/static/**", "anon");
-        hashMap.put("/**", "authc");
+        hashMap.put("/**", "user");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;
     }
@@ -84,6 +85,24 @@ public class ShiroConf {
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
+    }
+
+    @Bean
+     public CookieRememberMeManager rememberMeManager(){
+              //System.out.println("ShiroConfiguration.rememberMeManager()");
+              CookieRememberMeManager cookieRememberMeManager = new CookieRememberMeManager();
+             cookieRememberMeManager.setCookie(rememberMeCookie());
+                //rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度(128 256 512 位)
+             cookieRememberMeManager.setCipherKey(Base64.decode("2AvVhdsgUs0FSA3SDFAdag=="));
+              return cookieRememberMeManager;
+         }
+
+    @Bean
+    public SimpleCookie rememberMeCookie() {
+        SimpleCookie simpleCookie = new SimpleCookie("rememberMe");
+        simpleCookie.setHttpOnly(true);
+        simpleCookie.setMaxAge(7 * 24 * 60 * 60);//7天
+        return simpleCookie;
     }
 
 }
